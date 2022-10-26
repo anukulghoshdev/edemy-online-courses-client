@@ -1,8 +1,8 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
-import Header from '../Components/Header/Header';
-import LeftSideNav from '../Components/LeftSideNav/LeftSideNav';
+import Header from '../Header/Header';
+import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Main = () => {
     return (
