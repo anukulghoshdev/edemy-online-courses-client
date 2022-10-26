@@ -1,21 +1,24 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Main = () => {
+    const {pathname} = useLocation()
+    
     return (
         <div>
             <Header></Header>
 
             <Container>
-                <Row>
-                    <Col lg='2' >
+                <Row >
+                    {pathname !== ('/'|| '/home') && <Col lg='2' >
                         <LeftSideNav></LeftSideNav>
-                    </Col>
+                    </Col> }
+                    
 
-                    <Col lg='10'>
+                    <Col lg={pathname == ('/'|| '/home')?'12' : '10'}>
                         <Outlet></Outlet>
                     </Col>
                 </Row>

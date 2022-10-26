@@ -8,7 +8,7 @@ const Category = () => {
     console.log(categoryCourses);
     return (
         <Container>
-            <Row>
+            <Row className=' w-100 mx-auto gap-4 mt-4'>
                 {
                     categoryCourses.map(course => <CourseSummery
                         key={course._id}

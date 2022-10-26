@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { MDBIcon } from 'mdb-react-ui-kit';
 
 import { MDBBtn } from 'mdb-react-ui-kit';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Header = () => {
     // const [dark, setDark] = useState(false)
@@ -19,6 +20,10 @@ const Header = () => {
     // const handleToggle = () => {
     //     setDark(!dark);
     // }
+
+    // const {user} = useContext(AuthContext);
+    // console.log(user);
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="white" variant="white" className='shadow p-3'>
             <Container>
