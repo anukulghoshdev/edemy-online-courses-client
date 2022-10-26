@@ -7,6 +7,7 @@ import Faq from "../Components/Faq/Faq";
 import Home from "../Components/Home/Home";
 import Main from "../Components/layout/Main";
 import Login from "../Components/Login/Login";
+import Signup from "../Components/Signup/Signup";
 
 export const router = createBrowserRouter([
     {
@@ -62,6 +63,6 @@ export const router = createBrowserRouter([
     },
     {
         path: '/register',
-        element: <re
+        element: <Signup></Signup>
     }
 ])

@@ -7,18 +7,25 @@ import { Link } from 'react-router-dom';
 import './Header.css'
 import { FaToggleOn } from "react-icons/fa";
 import { FaToggleOff } from "react-icons/fa";
+import { MDBSwitch } from 'mdb-react-ui-kit';
 import { useState } from 'react';
+import { MDBIcon } from 'mdb-react-ui-kit';
+
+import { MDBBtn } from 'mdb-react-ui-kit';
 
 const Header = () => {
-    const [dark, setDark] = useState(false)
+    // const [dark, setDark] = useState(false)
 
-    const handleToggle = () => {
-        setDark(!dark);
-    }
+    // const handleToggle = () => {
+    //     setDark(!dark);
+    // }
     return (
         <Navbar collapseOnSelect expand="lg" bg="white" variant="white" className='shadow p-3'>
             <Container>
-                <Navbar.Brand className='h5 '><Link className='nav-item' to='/'>eDemy</Link></Navbar.Brand>
+                <Link className='nav-item d-flex mt-1' to='/'>
+                    <MDBIcon fas icon="laptop-code" size='2x' className='mx-2' />
+                    <Navbar.Brand className='h2'>eDemy</Navbar.Brand>
+                </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto nav-items">
@@ -27,21 +34,31 @@ const Header = () => {
                         <Nav.Link ><Link className='nav-item' to='/faq'>FAQ</Link></Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link>Sign Up</Nav.Link>
-
-                        <Nav.Link eventKey={2} >
-                            <Button>Login</Button>
+                        <Nav.Link>
+                            <Link to='/register'>
+                                <MDBBtn className='text-dark' color='light'>
+                                    Sign Up
+                                </MDBBtn>
+                            </Link>
                         </Nav.Link>
 
-                        <Button variant="link" onClick={handleToggle}>
-                            {
-                                dark?<FaToggleOff className='h2 ' style={{color: 'black'}}></FaToggleOff>:<FaToggleOn className='h2' style={{color: 'black'}}></FaToggleOn>
-                            }
-                            
-                            
-                        </Button>
 
-                        
+
+                        <Nav.Link eventKey={2} >
+                            <Link to='/login'>
+                                <MDBBtn>Login</MDBBtn>
+                            </Link>
+                        </Nav.Link>
+
+                        {/* <Button variant="link" onClick={handleToggle}>
+                            {
+                                dark ? <FaToggleOff className='h2 ' style={{ color: 'black' }}></FaToggleOff> : <FaToggleOn className='h2' style={{ color: 'black' }}></FaToggleOn>
+                            }
+                        </Button> */}
+
+                        <MDBSwitch className='m-3 ' defaultChecked id='flexSwitchCheckChecked' />
+
+
 
                     </Nav>
                 </Navbar.Collapse>
