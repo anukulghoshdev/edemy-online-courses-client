@@ -8,7 +8,7 @@ const Courses = () => {
 
     return (
         <Container >
-            <Row className='border border-secondary'>
+            <Row className=' w-100 mx-auto gap-4 mt-4'>
                 {
                     allCourses.map(course => <CourseSummery key={course._id} course={course}></CourseSummery>)
                 }
