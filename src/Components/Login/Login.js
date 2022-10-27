@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from '../Header/Header';
 import './Login.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+    const { logIn } = useContext(AuthContext);
+
+    const navigate = useNavigate()
+
+
     const handleSubmit=(e)=>{
         e.preventDefault();
         const form = e.target;
@@ -11,6 +18,36 @@ const Login = () => {
         const password = form.password.value;
 
         console.log(email, password);
+
+
+        logIn(email, password)
+            .then(result => {
+                const user  = result.user;
+                console.log(result.user);
+                form.reset();
+                navigate('/')
+                toast.success('Login Successful');
+
+                // setError('');
+
+                // if(user.emailVerified){
+                //     // navigate(from, {replace:true});
+                //     toast.success('Login Successful')
+                // }
+
+                // else{
+                //     toast.error('your email in not verified! please verify your email');
+                // }
+                
+            })
+            .catch(error => {
+                console.log(error.message);
+                // toast.error(error.message);
+                // setError(error.message);
+            })
+            // .finally(()=>{
+            //     setLoading(false);
+            // })
     }
     return (
         <div>

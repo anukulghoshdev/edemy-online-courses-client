@@ -5,9 +5,14 @@ import { MDBBtn, MDBIcon } from 'mdb-react-ui-kit';
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
+import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
+
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 const Signup = () => {
-    const { signupWtihEmailPassword, updateUserProfile } = useContext(AuthContext)
+    const { signupWtihEmailPassword, updateUserProfile, verifyEmail, signInGoogle, signInGitHub } = useContext(AuthContext)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,7 +30,8 @@ const Signup = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
-                handleUpdateProfile(name, photoURL)
+                handleUpdateProfile(name, photoURL);
+                verifyEamil();
                 toast.success('Registration successful');
             })
             .catch(error => {
@@ -44,6 +50,51 @@ const Signup = () => {
         updateUserProfile(profile)
             .then(() => { toast.success('profile updated'); })
             .catch(error => console.error(error));
+    }
+
+
+    // verify email
+    const verifyEamil = () => {
+        verifyEmail()
+            .then(() => {
+                toast.success('Check your email for verification!')
+            })
+            .catch((error) => {
+                toast.error(error.message)
+            })
+    }
+
+
+
+    // login with google
+    const handleGoogleSignIn = () => {
+        signInGoogle(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                // navigate('/')
+                toast.success('Login with google successfully');
+            })
+            .catch(error => {
+                console.log(error);
+                // setError(error.message);
+            })
+    }
+
+
+    // login with github
+    const handleGithubSignIn = () => {
+        signInGitHub(githubProvider)
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                // setUser(user);
+                console.log(user);
+            })
+            .catch((error) => {
+                // setUser({})
+                console.error(error);
+            })
     }
 
 
@@ -102,17 +153,14 @@ const Signup = () => {
                                 Sign Up
                             </button>
                         </div>
-                        <p className="text-center mt-2">
-                            <Link to="#">Forgot password?</Link>
-                        </p>
                     </div>
-
+                    <br />
                     <div className='text-center'>
-                        <MDBBtn className='mx-1 h3' style={{ backgroundColor: '#dd4b39' }} href='#'>
+                        <MDBBtn onClick={handleGoogleSignIn} className='mx-1 h3' style={{ backgroundColor: '#dd4b39' }} href='#'>
                             <MDBIcon fab icon='google' />
                         </MDBBtn>
 
-                        <MDBBtn className='mx-1 h3' style={{ backgroundColor: '#333333' }} href='#'>
+                        <MDBBtn onClick={handleGithubSignIn} className='mx-1 h3' style={{ backgroundColor: '#333333' }} href='#'>
                             <MDBIcon fab icon='github' />
                         </MDBBtn>
                     </div>

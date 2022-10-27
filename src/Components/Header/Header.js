@@ -15,6 +15,7 @@ import { MDBBtn } from 'mdb-react-ui-kit';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Header = () => {
+    const { user } = useContext(AuthContext);
     // const [dark, setDark] = useState(false)
 
     // const handleToggle = () => {
@@ -25,7 +26,7 @@ const Header = () => {
     // console.log(user);
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="white" variant="white" className='shadow p-3'>
+        <Navbar sticky='top' collapseOnSelect expand="lg" bg="white" variant="white" className='shadow p-3'>
             <Container>
                 <Link className='nav-item d-flex mt-1' to='/'>
                     <MDBIcon fas icon="laptop-code" size='2x' className='mx-2' />
@@ -54,6 +55,7 @@ const Header = () => {
                                 <MDBBtn>Login</MDBBtn>
                             </Link>
                         </Nav.Link>
+                        
 
                         {/* <Button variant="link" onClick={handleToggle}>
                             {
