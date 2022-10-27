@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css'
-import { FaToggleOn } from "react-icons/fa";
+import { FaToggleOn, FaUserAlt } from "react-icons/fa";
 import { FaToggleOff } from "react-icons/fa";
 import { MDBSwitch } from 'mdb-react-ui-kit';
 import { useState } from 'react';
@@ -13,9 +13,10 @@ import { MDBIcon } from 'mdb-react-ui-kit';
 
 import { MDBBtn } from 'mdb-react-ui-kit';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { user, userlogOut } = useContext(AuthContext);
     // const [dark, setDark] = useState(false)
 
     // const handleToggle = () => {
@@ -24,6 +25,20 @@ const Header = () => {
 
     // const {user} = useContext(AuthContext);
     // console.log(user);
+
+
+    const navigate = useNavigate();
+
+    const handleLogOut = () => {
+        userlogOut()
+            .then(() => {
+                toast.error('User logged out');
+                navigate('/login')
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 
     return (
         <Navbar sticky='top' collapseOnSelect expand="lg" bg="white" variant="white" className='shadow p-3'>
@@ -40,22 +55,61 @@ const Header = () => {
                         <Nav.Link ><Link className='nav-item' to='/faq'>FAQ</Link></Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link>
-                            <Link to='/register'>
-                                <MDBBtn className='text-dark' color='light'>
-                                    Sign Up
-                                </MDBBtn>
-                            </Link>
-                        </Nav.Link>
+                        <>
+                            {
+                                user?.uid ?
+                                    <Link to='/profile' className='d-flex'>
+                                        <span className='me-2 mt-2'>
+                                            <strong>{user?.displayName}</strong>{' '}
+                                            
+
+                                            {
+                                                user?.photoURL ?
+                                                    <Image
+                                                        roundedCircle
+                                                        style={{ height: '40px' }}
+                                                        src={user?.photoURL}>
+                                                    </Image> :
+
+                                                    <FaUserAlt></FaUserAlt>
+                                            }
+                                            
+                                        </span>
+
+                                        <Nav.Link eventKey={2} >
+                                            
+                                            <MDBBtn onClick={handleLogOut}>Logout</MDBBtn>
+                                            
+                                        </Nav.Link>
+
+                                    </Link>
+                                    :
+                                    <>
+                                        <Nav.Link>
+                                            <Link to='/register'>
+                                                <MDBBtn className='text-dark' color='light'>
+                                                    Sign Up
+                                                </MDBBtn>
+                                            </Link>
+                                        </Nav.Link>
+
+                                        <Nav.Link eventKey={2} >
+                                            <Link to='/login'>
+                                                <MDBBtn>Login</MDBBtn>
+                                            </Link>
+                                        </Nav.Link>
+                                    </>
+                            }
+                        </>
 
 
 
-                        <Nav.Link eventKey={2} >
-                            <Link to='/login'>
-                                <MDBBtn>Login</MDBBtn>
-                            </Link>
-                        </Nav.Link>
-                        
+
+
+
+
+
+
 
                         {/* <Button variant="link" onClick={handleToggle}>
                             {

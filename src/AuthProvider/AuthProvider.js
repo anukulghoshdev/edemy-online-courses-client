@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { createContext } from 'react';
-import { getAuth, createUserWithEmailAndPassword, updateProfile, sendEmailVerification, signInWithPopup, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, sendEmailVerification, signInWithPopup, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import app from '../firebase/firebase.init';
 
 
@@ -50,6 +50,11 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
+    const userlogOut = () => {
+        // setLoading(true);
+        return signOut(auth)
+    }
+
     // so much difficult --> user login / signout hole eta track rakhe
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -63,7 +68,7 @@ const AuthProvider = ({ children }) => {
     })
 
 
-    const AuthInfo = { signupWtihEmailPassword, updateUserProfile, verifyEmail, signInGoogle, signInGitHub, logIn }
+    const AuthInfo = { user, signupWtihEmailPassword, updateUserProfile, verifyEmail, signInGoogle, signInGitHub, logIn, userlogOut }
     return (
         <div>
             <AuthContext.Provider value={AuthInfo}>

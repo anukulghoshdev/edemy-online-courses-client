@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 const Login = () => {
     const { logIn } = useContext(AuthContext);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
 
     const handleSubmit=(e)=>{
