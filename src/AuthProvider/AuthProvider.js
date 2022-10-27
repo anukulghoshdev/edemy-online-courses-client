@@ -14,12 +14,13 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({})
-    // const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
 
 
 
     // user sign up
     const signupWtihEmailPassword = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
@@ -35,11 +36,12 @@ const AuthProvider = ({ children }) => {
 
     // signin google
     const signInGoogle = (provider) => {
-        // setLoading(true);
+        setLoading(true);
         return signInWithPopup(auth, provider)
     }
 
     const signInGitHub = (githubProvider) => {
+        setLoading(true);
         return signInWithPopup(auth, githubProvider)
     }
 
@@ -51,7 +53,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const userlogOut = () => {
-        // setLoading(true);
+        setLoading(true);
         return signOut(auth)
     }
 
@@ -59,8 +61,8 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            // setLoading(false);
-            console.log('Auth state change', currentUser);
+            // console.log('Auth state change', currentUser);
+            setLoading(false);
         })
         return () => {
             unsubscribe();
@@ -68,7 +70,7 @@ const AuthProvider = ({ children }) => {
     })
 
 
-    const AuthInfo = { user, signupWtihEmailPassword, updateUserProfile, verifyEmail, signInGoogle, signInGitHub, logIn, userlogOut }
+    const AuthInfo = { user, signupWtihEmailPassword, updateUserProfile, verifyEmail, signInGoogle, signInGitHub, logIn, userlogOut, loading }
     return (
         <div>
             <AuthContext.Provider value={AuthInfo}>
