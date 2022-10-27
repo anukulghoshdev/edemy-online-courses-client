@@ -5,7 +5,9 @@ const Faq = () => {
     return (
         <div>
             <Header></Header>
-            <h3>FAQ page</h3>
+            <div className='container'>
+                <h3>FAQ page</h3>
+            </div>
         </div>
     );
 };

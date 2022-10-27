@@ -15,6 +15,9 @@ import { MDBBtn } from 'mdb-react-ui-kit';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css'; // optional
+
 const Header = () => {
     const { user, userlogOut } = useContext(AuthContext);
     // const [dark, setDark] = useState(false)
@@ -61,46 +64,51 @@ const Header = () => {
                                     <Link to='/profile' className='d-flex'>
                                         <span className='me-2 mt-2'>
                                             <strong>{user?.displayName}</strong>{' '}
-                                            
+
 
                                             {
                                                 user?.photoURL ?
-                                                    <Image
-                                                        roundedCircle
-                                                        style={{ height: '40px' }}
-                                                        src={user?.photoURL}>
-                                                    </Image> :
+                                                    <Tippy content={user?.displayName}>
+                                                        <Image
+                                                            roundedCircle
+                                                            style={{ height: '40px' }}
+                                                            src={user?.photoURL}>
+                                                        </Image>
+                                                    </Tippy>
 
-                                                    <FaUserAlt></FaUserAlt>
+                                                    :
+                                                    <Tippy content={user?.displayName}>
+                                                        <FaUserAlt></FaUserAlt>
+                                                    </Tippy>
                                             }
-                                            
+
                                         </span>
 
                                         <Nav.Link eventKey={2} >
-                                            
+
                                             <MDBBtn onClick={handleLogOut}>Logout</MDBBtn>
-                                            
+
                                         </Nav.Link>
 
                                     </Link>
-                                    :
-                                    <>
-                                        <Nav.Link>
-                                            <Link to='/register'>
-                                                <MDBBtn className='text-dark' color='light'>
-                                                    Sign Up
-                                                </MDBBtn>
-                                            </Link>
-                                        </Nav.Link>
+                        :
+                        <>
+                            <Nav.Link>
+                                <Link to='/register'>
+                                    <MDBBtn className='text-dark' color='light'>
+                                        Sign Up
+                                    </MDBBtn>
+                                </Link>
+                            </Nav.Link>
 
-                                        <Nav.Link eventKey={2} >
-                                            <Link to='/login'>
-                                                <MDBBtn>Login</MDBBtn>
-                                            </Link>
-                                        </Nav.Link>
-                                    </>
-                            }
+                            <Nav.Link eventKey={2} >
+                                <Link to='/login'>
+                                    <MDBBtn>Login</MDBBtn>
+                                </Link>
+                            </Nav.Link>
                         </>
+                            }
+                    </>
 
 
 
@@ -111,20 +119,20 @@ const Header = () => {
 
 
 
-                        {/* <Button variant="link" onClick={handleToggle}>
+                    {/* <Button variant="link" onClick={handleToggle}>
                             {
                                 dark ? <FaToggleOff className='h2 ' style={{ color: 'black' }}></FaToggleOff> : <FaToggleOn className='h2' style={{ color: 'black' }}></FaToggleOn>
                             }
                         </Button> */}
 
-                        <MDBSwitch className='m-3 ' defaultChecked id='flexSwitchCheckChecked' />
+                    <MDBSwitch className='m-3 ' defaultChecked id='flexSwitchCheckChecked' />
 
 
 
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+                </Nav>
+            </Navbar.Collapse>
+        </Container>
+        </Navbar >
     );
 };
 
