@@ -10,12 +10,12 @@ const CourseDetail = () => {
     const singleCourse = useLoaderData();
     const { _id, details, lavel, rating, thumbnail_url, title, total_view } = singleCourse;
     return (
-        <>
+        <div className='my-4 p-0 border-0 shadow '>
             <Card>
                 <div className='d-flex justify-content-between p-3'>
                     <h1>{title}</h1>
                     <button type="button" class="btn btn-primary btn-floating">
-                        <i class="fas fa-download"></i>
+                        <i className="fas fa-download"></i>
                     </button>
                 </div>
                 <Card.Img variant="top" style={{ height: '30rem' }} src={thumbnail_url} />
@@ -43,7 +43,7 @@ const CourseDetail = () => {
             <Link to={`/checkout/${_id}`}>
                 <button type="button" class="btn btn-warning btn-rounded btn-lg btn-block">Get premium access</button>
             </Link>
-        </>
+        </div>
     );
 };
 

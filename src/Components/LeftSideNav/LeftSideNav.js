@@ -10,9 +10,9 @@ const LeftSideNav = () => {
     }, [])
     
     return (
-        <div>
+        <div className=' p-3 border-3 shadow mt-4 ' >
             {
-                categories.map(category=><p><Link to={`/category/${category.id}`}>{category.name}</Link></p>)
+                categories.map(category=><p className='border border-light px-3 '><Link to={`/category/${category.id}`}>{category.name}</Link></p>)
             }
         </div>
     );

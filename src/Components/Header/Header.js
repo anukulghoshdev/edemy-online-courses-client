@@ -41,7 +41,7 @@ const Header = () => {
     }
 
     return (
-        <Navbar sticky='top' collapseOnSelect expand="lg" bg="white" variant="white" className='shadow p-3'>
+        <Navbar sticky='top' collapseOnSelect expand="lg" bg="white" variant="white" className='shadow p-3 '>
             <Container>
                 <Link className='nav-item d-flex mt-1' to='/'>
                     <MDBIcon fas icon="laptop-code" size='2x' className='mx-2' />
