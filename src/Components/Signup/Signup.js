@@ -119,6 +119,7 @@ const Signup = () => {
                                 name='name'
                                 className="form-control mt-1"
                                 placeholder="e.g Jane Doe"
+                                required
                             />
                         </div>
                         <div className="form-group mt-3">
@@ -128,6 +129,7 @@ const Signup = () => {
                                 name='email'
                                 className="form-control mt-1"
                                 placeholder="Email Address"
+                                required
                             />
                         </div>
                         <div className="form-group mt-3">
@@ -146,6 +148,7 @@ const Signup = () => {
                                 name='password'
                                 className="form-control mt-1"
                                 placeholder="Password"
+                                required
                             />
                         </div>
                         <div className="d-grid gap-2 mt-3">

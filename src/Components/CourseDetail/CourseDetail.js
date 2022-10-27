@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Link, useLoaderData } from 'react-router-dom';
 import { HiStar } from "react-icons/hi";
 import { HiEye } from "react-icons/hi";
 import { HiCheckCircle } from "react-icons/hi";
-import { FaDownload } from "react-icons/fa";
+import { useReactToPrint } from 'react-to-print';
+
 
 const CourseDetail = () => {
     const singleCourse = useLoaderData();
     const { _id, details, lavel, rating, thumbnail_url, title, total_view } = singleCourse;
+    
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: ()=> componentRef.current,
+        documentTitle: 'Course-Details',
+        onafterprint: ()=>alert('Print Success')
+    });
     return (
-        <div className='my-4 p-0 border-0 shadow '>
+        <div ref={componentRef} className='my-4 px-2 border-0 shadow '>
             <Card>
                 <div className='d-flex justify-content-between p-3'>
                     <h1>{title}</h1>
-                    <button type="button" class="btn btn-primary btn-floating">
+                    <button type="button" class="btn btn-primary btn-floating" onClick={handlePrint}>
                         <i className="fas fa-download"></i>
                     </button>
                 </div>

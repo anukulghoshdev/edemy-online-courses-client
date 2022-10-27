@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from '../Header/Header';
 import './Login.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -12,6 +12,9 @@ const Login = () => {
 
     const location = useLocation();
     const from  = location.state?.from?.pathname || '/';
+
+
+    const [error, setError] = useState('');
 
 
     const handleSubmit=(e)=>{
@@ -29,6 +32,7 @@ const Login = () => {
                 console.log(result.user);
                 form.reset();
                 navigate(from, {replace: true})
+                setError('');
                 toast.success('Login Successful');
 
                 // setError('');
@@ -72,6 +76,7 @@ const Login = () => {
                                 name='email'
                                 className="form-control mt-1"
                                 placeholder="Enter email"
+                                required
                             />
                         </div>
                         <div className="form-group mt-3">
@@ -81,6 +86,7 @@ const Login = () => {
                                 name='password'
                                 className="form-control mt-1"
                                 placeholder="Enter password"
+                                required
                             />
                         </div>
                         <div className="d-grid gap-2 mt-3">
