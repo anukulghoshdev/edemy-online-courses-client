@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import Header from '../Header/Header';
 import './Login.css'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 
@@ -11,13 +11,13 @@ const Login = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
-    const from  = location.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/';
 
 
     const [error, setError] = useState('');
 
 
-    const handleSubmit=(e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
@@ -28,10 +28,10 @@ const Login = () => {
 
         logIn(email, password)
             .then(result => {
-                const user  = result.user;
-                console.log(result.user);
+                const user = result.user;
+                console.log(user);
                 form.reset();
-                navigate(from, {replace: true})
+                navigate(from, { replace: true })
                 setError('');
                 toast.success('Login Successful');
 
@@ -45,16 +45,17 @@ const Login = () => {
                 // else{
                 //     toast.error('your email in not verified! please verify your email');
                 // }
-                
+
             })
             .catch(error => {
                 console.log(error.message);
+                setError(error.message);
                 // toast.error(error.message);
                 // setError(error.message);
             })
-            // .finally(()=>{
-            //     setLoading(false);
-            // })
+        // .finally(()=>{
+        //     setLoading(false);
+        // })
     }
     return (
         <div>
@@ -66,7 +67,7 @@ const Login = () => {
                         <div className="text-center">
                             Don't have an account?{" "}
                             <span className="link-primary" >
-                            <Link to='/register'>Sign Up</Link>
+                                <Link to='/register'>Sign Up</Link>
                             </span>
                         </div>
                         <div className="form-group mt-3">
@@ -90,15 +91,22 @@ const Login = () => {
                             />
                         </div>
                         <div className="d-grid gap-2 mt-3">
-                            <button  type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn btn-primary">
                                 Login
                             </button>
                         </div>
+
+                        {
+                            error? <p className='text-danger'>{error}</p> : ''
+                        }
+
+                        
+
                         <p className="forgot-password text-right mt-2">
                             <Link to="#">Forgot password?</Link>
                         </p>
                     </div>
-                    
+
                 </form>
             </div>
         </div>

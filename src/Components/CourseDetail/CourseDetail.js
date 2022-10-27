@@ -18,7 +18,7 @@ const CourseDetail = () => {
         onafterprint: ()=>alert('Print Success')
     });
     return (
-        <div ref={componentRef} className='my-4 px-2 border-0 shadow '>
+        <div ref={componentRef} className='my-4 p-2 border-0 shadow '>
             <Card>
                 <div className='d-flex justify-content-between p-3'>
                     <h1>{title}</h1>

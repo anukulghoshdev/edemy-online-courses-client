@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import { MDBBtn, MDBIcon } from 'mdb-react-ui-kit';
 import { useContext } from 'react';
@@ -13,6 +13,10 @@ const githubProvider = new GithubAuthProvider();
 
 const Signup = () => {
     const { signupWtihEmailPassword, updateUserProfile, verifyEmail, signInGoogle, signInGitHub } = useContext(AuthContext)
+
+    const [error, setError] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,12 +34,15 @@ const Signup = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
+                setError('');
                 handleUpdateProfile(name, photoURL);
                 verifyEamil();
+                navigate('/');
                 toast.success('Registration successful');
             })
             .catch(error => {
                 toast.error(error.message);
+                setError(error.message);
             })
     }
 
@@ -60,7 +67,7 @@ const Signup = () => {
                 toast.success('Check your email for verification!')
             })
             .catch((error) => {
-                toast.error(error.message)
+                toast.error(error.message);
             })
     }
 
@@ -72,12 +79,14 @@ const Signup = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                // navigate('/')
+                setError('');
+                navigate('/');
                 toast.success('Login with google successfully');
             })
             .catch(error => {
                 console.log(error);
-                // setError(error.message);
+                setError(error.message);
+                
             })
     }
 
@@ -88,12 +97,15 @@ const Signup = () => {
             .then((result) => {
                 const user = result.user;
                 console.log(user);
+                setError('');
+                navigate('/');
                 // setUser(user);
                 console.log(user);
             })
             .catch((error) => {
                 // setUser({})
                 console.error(error);
+                setError(error.message);
             })
     }
 
