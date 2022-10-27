@@ -30,19 +30,19 @@ export const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 loader: ({params})=>{
-                    return fetch(`http://localhost:5000/category/${params.id}`)
+                    return fetch(`https://edemy-server-kohl.vercel.app/category/${params.id}`)
                 },
                 element: <Category></Category>
 
             },
             {
                 path: '/courses',
-                loader: ()=>fetch('http://localhost:5000/courses'),
+                loader: ()=>fetch('https://edemy-server-kohl.vercel.app/courses'),
                 element: <Courses></Courses>
             },
             {
                 path: '/course/:id',
-                loader: ({params})=>fetch(`http://localhost:5000/course/${params.id}`),
+                loader: ({params})=>fetch(`https://edemy-server-kohl.vercel.app/course/${params.id}`),
                 element: <CourseDetail></CourseDetail>
             },
             
@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
 
     {
         path: '/checkout/:course_id',
-        loader: ({params})=>fetch(`http://localhost:5000/course/${params.course_id}`),
+        loader: ({params})=>fetch(`https://edemy-server-kohl.vercel.app/course/${params.course_id}`),
         element: <PrivateRoute><Checkout></Checkout></PrivateRoute>
     },
     

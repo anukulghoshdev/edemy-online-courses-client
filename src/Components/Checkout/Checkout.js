@@ -9,7 +9,9 @@ const Checkout = () => {
     return (
         <div>
             <Header></Header>
+            <div className='container'>
             <h1>{title}</h1>
+            </div>
         </div>
     );
 };

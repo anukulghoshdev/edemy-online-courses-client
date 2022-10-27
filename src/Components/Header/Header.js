@@ -20,11 +20,13 @@ import 'tippy.js/dist/tippy.css'; // optional
 
 const Header = () => {
     const { user, userlogOut } = useContext(AuthContext);
-    // const [dark, setDark] = useState(false)
+
+    const [dark, setDark] = useState(false)
 
     // const handleToggle = () => {
     //     setDark(!dark);
     // }
+    
 
     // const {user} = useContext(AuthContext);
     // console.log(user);
@@ -41,6 +43,11 @@ const Header = () => {
             .catch(error => {
                 console.log(error);
             })
+    }
+
+    const handletoogle=(event)=>{
+        console.log(event.target.checked);
+        setDark(event.target.checked);
     }
 
     return (
@@ -125,7 +132,9 @@ const Header = () => {
                             }
                         </Button> */}
 
-                    <MDBSwitch className='m-3 ' defaultChecked id='flexSwitchCheckChecked' />
+                    <MDBSwitch className='m-3 ' defaultChecked id='flexSwitchCheckChecked' onClick={handletoogle}/>
+
+                    { dark? <strong className='m-2'>Dark</strong> : <strong className='m-2'>Light</strong>}
 
 
 
